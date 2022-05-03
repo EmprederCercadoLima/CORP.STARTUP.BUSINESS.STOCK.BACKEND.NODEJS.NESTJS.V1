@@ -1,0 +1,20 @@
+{
+  "name": "CORP.STARTUP.BUSINESS.STOCK.BACKEND.NODEJS.NESTJS.V1",
+  "version": "1.0.0",
+  "description": "## Eventos Historicos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmprederCercadoLima/CORP.STARTUP.BUSINESS.STOCK.BACKEND.NODEJS.NESTJS.V1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmprederCercadoLima/CORP.STARTUP.BUSINESS.STOCK.BACKEND.NODEJS.NESTJS.V1/issues"
+  },
+  "homepage": "https://github.com/EmprederCercadoLima/CORP.STARTUP.BUSINESS.STOCK.BACKEND.NODEJS.NESTJS.V1#readme"
+}
