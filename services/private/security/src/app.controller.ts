@@ -1,12 +1,29 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
+import { RequestCreateTokenInterface } from './interfaces';
+import { CreateTokenService, DeleteTokenService, InsertTokenService } from './services';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly createTokenService: CreateTokenService,
+    private readonly deleteTokenService: DeleteTokenService,
+    private readonly insertTokenService: InsertTokenService,
+  ) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @MessagePattern({ microservice: 'security', function: 'create-token' })
+  createToken(requestCreateTokenInterface : RequestCreateTokenInterface) {
+    return this.createTokenService.execute(requestCreateTokenInterface);
   }
+
+  @MessagePattern({ microservice: 'security', function: 'insert-token' })
+  insertToken() {
+    return this.insertTokenService.execute();
+  }
+
+  @MessagePattern({ microservice: 'security', function: 'delete-token' })
+  deleteToken() {
+    return this.deleteTokenService.execute();
+  }
+
 }

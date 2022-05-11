@@ -1,0 +1,23 @@
+{
+  "name": "@corp.startup.business.stock.backend.nodejs.nestjs/security",
+  "version": "0.0.4",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "push": "npm run build && npm publish"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/common": "^8.0.0",
+    "@nestjs/microservices": "^8.4.4",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.5.5"
+  },
+  "devDependencies": {
+    "@types/node": "12.12.7",
+    "typescript": "^4.3.5"
+  }
+}

@@ -17,3 +17,6 @@
             - master
             - transaction
 
+2.- Implementacion de Logica para el Login en el microservicios de authentication
+
+3.- Implementacion del microservicios de security; creacion y gestion de tokens
