@@ -18,19 +18,30 @@ const microservices_1 = require("@nestjs/microservices");
 let SecurityService = class SecurityService {
     constructor(client) {
         this.client = client;
-        this.logger = new common_1.Logger('client-security');
     }
     createToken(requestCreateTokenInterface) {
         const pattern = { microservice: 'security', function: 'create-token' };
-        return this.client.send(pattern, requestCreateTokenInterface).toPromise();
+        return this.client
+            .send(pattern, requestCreateTokenInterface)
+            .toPromise();
     }
     insertToken(requestInsertTokenInterface) {
         const pattern = { microservice: 'security', function: 'insert-token' };
-        return this.client.send(pattern, requestInsertTokenInterface).toPromise();
+        return this.client
+            .send(pattern, requestInsertTokenInterface)
+            .toPromise();
     }
     deleteToken(requestDeleteTokenInterface) {
         const pattern = { microservice: 'security', function: 'delete-token' };
-        return this.client.send(pattern, requestDeleteTokenInterface).toPromise();
+        return this.client
+            .send(pattern, requestDeleteTokenInterface)
+            .toPromise();
+    }
+    validateToken(requestValidateTokenInterface) {
+        const pattern = { microservice: 'security', function: 'validate-token' };
+        return this.client
+            .send(pattern, requestValidateTokenInterface)
+            .toPromise();
     }
 };
 SecurityService = __decorate([

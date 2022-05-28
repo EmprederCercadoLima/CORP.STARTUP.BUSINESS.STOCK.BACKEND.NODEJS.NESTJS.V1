@@ -6,20 +6,20 @@ export default () => ({
   client: {
     security: {
       host: process.env.CLIENT_SECURITY_HOST,
-      port: process.env.CLIENT_SECURITY_PORT
-    }
+      port: process.env.CLIENT_SECURITY_PORT,
+    },
   },
   database: {
     mongodb: {
       local: {
-        uri: 'mongodb://localhost/emprender'
+        uri: 'mongodb://localhost/emprender',
       },
       production: {
         uri: process.env.DATABASE_MONGO_HOSTNAME,
         user: process.env.DATABASE_MONGO_USER,
         pass: process.env.DATABASE_MONGO_PASSWORD,
-        dbName: process.env.DATABASE_MONGO_NAME
-      }
+        dbName: process.env.DATABASE_MONGO_NAME,
+      },
     },
-  }
-});
+  },
+})

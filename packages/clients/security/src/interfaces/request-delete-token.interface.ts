@@ -1,4 +1,4 @@
 export interface RequestDeleteTokenInterface {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 }

@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { RequestCreateTokenInterface } from './interfaces';
-import { CreateTokenService, DeleteTokenService, InsertTokenService } from './services';
+import { RequestCreateTokenInterface, RequestValidateTokenInterface } from './interfaces';
+import { CreateTokenService, DeleteTokenService, InsertTokenService, ValidateTokenService } from './services';
 
 @Controller()
 export class AppController {
@@ -9,6 +9,7 @@ export class AppController {
     private readonly createTokenService: CreateTokenService,
     private readonly deleteTokenService: DeleteTokenService,
     private readonly insertTokenService: InsertTokenService,
+    private readonly validateTokenService: ValidateTokenService
   ) {}
 
   @MessagePattern({ microservice: 'security', function: 'create-token' })
@@ -26,4 +27,9 @@ export class AppController {
     return this.deleteTokenService.execute();
   }
 
+  @MessagePattern({ microservice: 'security', function: 'validate-token' })
+  validateToken(requestValidateTokenInterface: RequestValidateTokenInterface) {
+    return this.validateTokenService.execute(requestValidateTokenInterface);
+  }
+  
 }

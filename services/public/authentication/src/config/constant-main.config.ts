@@ -5,4 +5,4 @@ export const mainConfig = {
     version: '1.0',
     swaggerBasePath: '/api',
   },
-};
+}

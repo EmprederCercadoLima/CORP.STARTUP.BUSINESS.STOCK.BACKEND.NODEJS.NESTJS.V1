@@ -36,7 +36,7 @@ export class SecurityModule {
         ...this.createAsyncProviders(option).concat(
           option.extraProviders || [],
         ),
-        SecurityService
+        SecurityService,
       ],
       exports: [SecurityService],
     };

@@ -17,7 +17,7 @@ export class Tokens {
           default: () => ([])
       })
   )
-  Tokens: []
+  tokens: string[]
 
   @Prop(
     raw({

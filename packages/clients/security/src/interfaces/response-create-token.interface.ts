@@ -1,3 +1,3 @@
 export interface ResponseCreateTokenInterface {
-    token: string;
+  token: string;
 }

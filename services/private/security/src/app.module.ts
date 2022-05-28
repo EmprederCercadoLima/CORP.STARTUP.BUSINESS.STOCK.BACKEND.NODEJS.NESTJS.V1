@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import configSetup from './config/constant-setup.config';
 import { Tokens, TokensSchema } from './schemas';
-import { CreateTokenService, DeleteTokenService, InsertTokenService } from './services';
+import { CreateTokenService, DeleteTokenService, InsertTokenService, ValidateTokenService } from './services';
 
 @Module({
   imports: [
@@ -42,6 +42,6 @@ import { CreateTokenService, DeleteTokenService, InsertTokenService } from './se
     }),
   ],
   controllers: [AppController],
-  providers: [CreateTokenService, DeleteTokenService, InsertTokenService],
+  providers: [CreateTokenService, DeleteTokenService, InsertTokenService, ValidateTokenService],
 })
 export class AppModule {}

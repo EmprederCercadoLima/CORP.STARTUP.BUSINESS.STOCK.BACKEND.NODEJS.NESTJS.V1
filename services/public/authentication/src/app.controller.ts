@@ -1,18 +1,9 @@
-import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { controllerConfig } from './config/constant-controller.config';
-import {
-  ReqPostLoginDto,
-  ReqPostLogoutDto,
-  ReqPostRecoveryPasswordDto,
-} from './dtos';
+import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common'
+import { ApiOperation, ApiTags } from '@nestjs/swagger'
+import { controllerConfig } from './config/constant-controller.config'
+import { ReqPostLoginDto, ReqPostLogoutDto, ReqPostRecoveryPasswordDto } from './dtos'
 
-import {
-  GetHashService,
-  PostLoginService,
-  PostLogoutService,
-  PostRecoveryPasswordService,
-} from './services';
+import { GetHashService, PostLoginService, PostLogoutService, PostRecoveryPasswordService } from './services'
 
 @Controller(controllerConfig.name)
 @ApiTags(controllerConfig.tag)
@@ -29,7 +20,7 @@ export class AppController {
   })
   @Get(controllerConfig.apis.getHash.name)
   getHash() {
-    return this.getHashService.execute();
+    return this.getHashService.execute()
   }
 
   @ApiOperation({
@@ -37,7 +28,7 @@ export class AppController {
   })
   @Post(controllerConfig.apis.postLogin.name)
   postLogin(@Body() reqPostLoginDto: ReqPostLoginDto) {
-    return this.postLoginService.execute(reqPostLoginDto);
+    return this.postLoginService.execute(reqPostLoginDto)
   }
 
   @ApiOperation({
@@ -45,16 +36,14 @@ export class AppController {
   })
   @Post(controllerConfig.apis.postLogout.name)
   postLogout(@Body() reqPostLogoutDto: ReqPostLogoutDto): string {
-    return this.postLogoutService.execute(reqPostLogoutDto);
+    return this.postLogoutService.execute(reqPostLogoutDto)
   }
 
   @ApiOperation({
     summary: controllerConfig.apis.postRecoveryPassword.operation.summary,
   })
   @Post(controllerConfig.apis.postRecoveryPassword.name)
-  postRecoveryPassword(
-    @Body() reqPostRecoveryPasswordDto: ReqPostRecoveryPasswordDto,
-  ) {
-    return this.postRecoveryPasswordService.execute(reqPostRecoveryPasswordDto);
+  postRecoveryPassword(@Body() reqPostRecoveryPasswordDto: ReqPostRecoveryPasswordDto) {
+    return this.postRecoveryPasswordService.execute(reqPostRecoveryPasswordDto)
   }
 }

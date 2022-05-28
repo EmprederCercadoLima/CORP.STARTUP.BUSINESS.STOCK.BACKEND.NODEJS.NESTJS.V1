@@ -1,4 +1,9 @@
 export interface RequestCreateTokenInterface {
+    idUser: string;
     email: string;
-    password: string;
+    firstName: string;
+    lastName: string;
+    idGrocer: string;
+    profile: string;
+    permisions: string[];
 }

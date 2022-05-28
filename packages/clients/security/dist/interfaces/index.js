@@ -18,6 +18,7 @@ __exportStar(require("./client-module.interface"), exports);
 __exportStar(require("./request-delete-token.interface"), exports);
 __exportStar(require("./request-create-token.interface"), exports);
 __exportStar(require("./request-insert-token.interface"), exports);
+__exportStar(require("./request-validate-token.interface"), exports);
 __exportStar(require("./response-delete-token.interface"), exports);
 __exportStar(require("./response-create-token.interface"), exports);
 __exportStar(require("./response-insert-token.interface"), exports);

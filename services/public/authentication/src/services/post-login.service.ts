@@ -1,72 +1,82 @@
-import { ConflictException, Injectable, Logger } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { SecurityService } from '@corp.startup.business.stock.backend.nodejs.nestjs/security/dist/security.service';
-import { Model } from 'mongoose';
-import { ReqPostLoginDto } from 'src/dtos';
-import { Hashes, HashesDocument, Users, UsersDocument } from 'src/schemas';
-import { CryptoUtil } from 'src/utils';
-import { RequestCreateTokenInterface } from '@corp.startup.business.stock.backend.nodejs.nestjs/security/dist/interfaces';
+import { ConflictException, Injectable, Logger } from '@nestjs/common'
+import { InjectModel } from '@nestjs/mongoose'
+import { EventEmitter2 } from '@nestjs/event-emitter';
+import { SecurityService } from '@corp.startup.business.stock.backend.nodejs.nestjs/security/dist/security.service'
+import { Model } from 'mongoose'
+import { ReqPostLoginDto } from 'src/dtos'
+import { Hashes, HashesDocument, Users, UsersDocument } from 'src/schemas'
+import { CryptoUtil } from 'src/utils'
+import { RequestCreateTokenInterface } from '@corp.startup.business.stock.backend.nodejs.nestjs/security/dist/interfaces'
+import { listenerConfig } from 'src/config/constant-listener.config'
 
 @Injectable()
 export class PostLoginService {
+  private readonly logger: Logger
 
-  private readonly logger: Logger;
-
-  constructor (
+  constructor(
+    private eventEmitter: EventEmitter2,
     @InjectModel(Hashes.name)
     private readonly hashesModule: Model<HashesDocument>,
     @InjectModel(Users.name)
     private readonly usersModule: Model<UsersDocument>,
-    private readonly securityService: SecurityService
+    private readonly securityService: SecurityService,
   ) {
-
-    this.logger = new Logger(PostLoginService.name);
-
+    this.logger = new Logger(PostLoginService.name)
   }
-  
+
   async execute(reqPostLoginDto: ReqPostLoginDto) {
+    const findOneHashById = await this.findOneHashById(reqPostLoginDto.id)
 
-    const findOneHashById = await this.findOneHashById(reqPostLoginDto.id);
+    this.logger.log(`${JSON.stringify(PostLoginService.name)}::execute::[reqPostLoginDto] ${JSON.stringify(reqPostLoginDto)}`)
 
-    this.logger.log(`${JSON.stringify(PostLoginService.name)}::execute::[reqPostLoginDto] ${JSON.stringify(reqPostLoginDto)}`);
-
-    if(!findOneHashById) {
-      throw new ConflictException('Los datos ingresados son incorrectos');
+    if (!findOneHashById) {
+      throw new ConflictException('Los datos ingresados son incorrectos')
     }
 
-    const decryptDataCredentials : any = CryptoUtil.decryptData(reqPostLoginDto.hash, findOneHashById.hashes.from, findOneHashById.keys.to);
+    const decryptDataCredentials: any = CryptoUtil.decryptData(reqPostLoginDto.hash, findOneHashById.hashes.from, findOneHashById.keys.to)
 
-    const parseJsonDecryptDataCredentials = JSON.parse(decryptDataCredentials);
-    const decryptDataEmail = CryptoUtil.decryptData(parseJsonDecryptDataCredentials.encryptDataEmail, findOneHashById.hashes.from, findOneHashById.keys.from);
-    const decryptDataPassword = CryptoUtil.decryptData(parseJsonDecryptDataCredentials.encryptDataPassword, findOneHashById.hashes.to, findOneHashById.keys.to);
+    const parseJsonDecryptDataCredentials = JSON.parse(decryptDataCredentials)
+    const decryptDataEmail = CryptoUtil.decryptData(parseJsonDecryptDataCredentials.encryptDataEmail, findOneHashById.hashes.from, findOneHashById.keys.from)
+    const decryptDataPassword = CryptoUtil.decryptData(parseJsonDecryptDataCredentials.encryptDataPassword, findOneHashById.hashes.to, findOneHashById.keys.to)
 
-    const findUserByEmail = await this.findUserByEmail(decryptDataEmail);
+    this.logger.log(`${JSON.stringify(PostLoginService.name)}::execute::[decryptDataEmail] ${JSON.stringify(decryptDataEmail)}`)
+    this.logger.log(`${JSON.stringify(PostLoginService.name)}::execute::[decryptDataPassword] ${JSON.stringify(decryptDataPassword)}`)
 
-    if(!findUserByEmail) {
-      throw new ConflictException('Usuario no se encuentra registrado o se encuentra eliminado');
+    const findUserByEmail = await this.findUserByEmail(decryptDataEmail)
+
+    if (findUserByEmail.password !== decryptDataPassword) {
+      throw new ConflictException('Email y/o password son incorrectos')
     }
 
-    if(findUserByEmail.password !== decryptDataPassword) {
-      throw new ConflictException('Email y/o password son incorrectos');
-    }
+    this.eventEmitter.emit(listenerConfig.hashes.event_remove_hash, {
+      idHash: reqPostLoginDto.id
+    });
 
-    return await this.securityService.createToken(<RequestCreateTokenInterface> { email: findUserByEmail.email, password: findUserByEmail.password })
-
+    return await this.securityService.createToken(<RequestCreateTokenInterface>{
+      idUser: findUserByEmail._id,
+      email: findUserByEmail.email,
+      profile: findUserByEmail.profile.code,
+      firstName: findUserByEmail.firstName,
+      lastName: findUserByEmail.lastName,
+      idGrocer: findUserByEmail.grocers[0],
+      permisions: findUserByEmail.permisions
+    })
   }
 
   private findOneHashById = (idHash: string) => {
-    return this.hashesModule.findById(idHash, { hashes: 1, keys: 1 }).exec();
+    return this.hashesModule.findById(idHash, { hashes: 1, keys: 1 }).exec()
   }
 
-  private findUserByEmail = (decryptDataEmail: string) => {
-    return this.usersModule.findOne({ email: decryptDataEmail, recordActive: true }, { email: 1, password: 1, auditProperties: 1 }).exec();
-  }
+  private findUserByEmail = async (decryptDataEmail: string) => {
+    const user = await this.usersModule.findOne(
+      { email: decryptDataEmail, "status.value": 1, recordActive: true }, 
+      { _id: 1, email: 1, firstName: 1, lastName: 1, password: 1, permisions: 1, grocers: 1, profile: 1, auditProperties: 1 }
+    ).exec();
 
-  private generateTokenJWT = (user) => {
-    return 'dsadsanjkdnsajkdnsandsakndjksandjksandjksandjksanjkdsankdnksandjksandjksanjkdnsjandnqwjeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq'
-  }
+    if (!user) {
+      throw new ConflictException('Usuario no se encuentra registrado')
+    }
 
-  private deleteHashes = () => {
-    
+    return user
   }
 }

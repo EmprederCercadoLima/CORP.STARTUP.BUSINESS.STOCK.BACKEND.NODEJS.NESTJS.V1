@@ -1,8 +1,8 @@
-import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-import { schemaConfig } from '../config/constant-schema.config';
+import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { Document } from 'mongoose'
+import { schemaConfig } from '../config/constant-schema.config'
 
-export type UsersDocument = Users & Document;
+export type UsersDocument = Users & Document
 
 @Schema({ collection: schemaConfig.users })
 export class Users {
@@ -10,33 +10,86 @@ export class Users {
     index: true,
     unique: true,
   })
-  email: string;
+  email: string
 
   @Prop({
-    index: true
+    index: true,
   })
-  password: string;
+  firstName: string
+
+  @Prop({
+    index: true,
+  })
+  lastName: string
+  
+  @Prop({
+    index: true,
+  })
+  password: string
+
+  @Prop(
+    raw({
+      type: {
+        code: String,
+        description: String,
+        _id: false,
+      },
+    })
+  )
+  profile: {
+    code: string,
+    description: string
+  }
+
+  @Prop(
+      raw({
+          type: [],
+          default: () => ([])
+      })
+  )
+  grocers: string[]
+
+  @Prop(
+      raw({
+          type: [],
+          default: () => ([])
+      })
+  )
+  permisions: string[]
 
   @Prop(
     raw({
         type: {
-            dateCreate: Date,
-            dateUpdate: Date,
-            userCreate: String,
-            userUpdate: String,
-            recordActive: Boolean,
+            description: String,
+            value: Number,
             _id : false
         }
     })
   )
-  auditProperties: {
-    dateCreate: Date;
-    dateUpdate: Date;
-    userCreate: string;
-    userUpdate: string;
-    recordActive: boolean;
+  status: {
+      description: string;
+      value: number;
   }
 
+  @Prop(
+    raw({
+      type: {
+        dateCreate: Date,
+        dateUpdate: Date,
+        userCreate: String,
+        userUpdate: String,
+        recordActive: Boolean,
+        _id: false,
+      },
+    }),
+  )
+  auditProperties: {
+    dateCreate: Date
+    dateUpdate: Date
+    userCreate: string
+    userUpdate: string
+    recordActive: boolean
+  }
 }
 
-export const UsersSchema = SchemaFactory.createForClass(Users);
+export const UsersSchema = SchemaFactory.createForClass(Users)

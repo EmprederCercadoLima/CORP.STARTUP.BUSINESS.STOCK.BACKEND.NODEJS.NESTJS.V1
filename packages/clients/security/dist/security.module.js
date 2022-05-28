@@ -31,7 +31,7 @@ let SecurityModule = SecurityModule_1 = class SecurityModule {
             imports: option.imports,
             providers: [
                 ...this.createAsyncProviders(option).concat(option.extraProviders || []),
-                security_service_1.SecurityService
+                security_service_1.SecurityService,
             ],
             exports: [security_service_1.SecurityService],
         };

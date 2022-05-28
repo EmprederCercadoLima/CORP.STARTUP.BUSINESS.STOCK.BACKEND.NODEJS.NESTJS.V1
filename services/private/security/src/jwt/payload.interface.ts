@@ -1,4 +1,7 @@
 export interface PayloadInterface {
-    email: string;
-    password: string;
-  }
+  email: string;
+  firstName: string;
+  lastName: string;
+  idGrocer: string;
+  permisions: string[];
+}

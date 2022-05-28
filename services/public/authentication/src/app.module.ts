@@ -1,18 +1,15 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { SecurityModule } from '@corp.startup.business.stock.backend.nodejs.nestjs/security/dist/security.module';
-import { AppController } from './app.controller';
-import configSetup from './config/constant-setup.config';
-import { Hashes, HashesSchema, Users, UsersSchema } from './schemas';
-import {
-  GetHashService,
-  PostLoginService,
-  PostLogoutService,
-  PostRecoveryPasswordService,
-} from './services';
-import { ResponseInterceptor } from './interceptors/response.interceptor';
+import { Module } from '@nestjs/common'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { MongooseModule } from '@nestjs/mongoose'
+import { APP_INTERCEPTOR } from '@nestjs/core'
+import { EventEmitterModule } from '@nestjs/event-emitter'
+import { SecurityModule } from '@corp.startup.business.stock.backend.nodejs.nestjs/security/dist/security.module'
+import { AppController } from './app.controller'
+import configSetup from './config/constant-setup.config'
+import { Hashes, HashesSchema, Users, UsersSchema } from './schemas'
+import { GetHashService, PostLoginService, PostLogoutService, PostRecoveryPasswordService } from './services'
+import { ResponseInterceptor } from './interceptors/response.interceptor'
+import { HashesListener } from './listeners/hashes.listener'
 
 @Module({
   imports: [
@@ -21,16 +18,16 @@ import { ResponseInterceptor } from './interceptors/response.interceptor';
       cache: true,
       load: [configSetup],
     }),
+    EventEmitterModule.forRoot(),
     SecurityModule.registerAsync({
       global: false,
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => configService.get('client.security'),
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        
         /**
          * connection database to localhost
          */
@@ -44,17 +41,24 @@ import { ResponseInterceptor } from './interceptors/response.interceptor';
         useFindAndModify: false,
         useCreateIndex: true*/
       }),
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
     MongooseModule.forFeature([
       { name: Hashes.name, schema: HashesSchema },
-      { name: Users.name, schema: UsersSchema }
-    ])
+      { name: Users.name, schema: UsersSchema },
+    ]),
   ],
   controllers: [AppController],
-  providers: [GetHashService, PostLoginService, PostLogoutService, PostRecoveryPasswordService, {
-    provide: APP_INTERCEPTOR,
-    useClass: ResponseInterceptor,
-  }],
+  providers: [
+    GetHashService,
+    PostLoginService,
+    PostLogoutService,
+    PostRecoveryPasswordService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseInterceptor,
+    },
+    HashesListener
+  ],
 })
 export class AppModule {}
