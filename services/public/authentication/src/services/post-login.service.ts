@@ -3,11 +3,11 @@ import { InjectModel } from '@nestjs/mongoose'
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { SecurityService } from '@corp.startup.business.stock.backend.nodejs.nestjs/security/dist/security.service'
 import { Model } from 'mongoose'
-import { ReqPostLoginDto } from 'src/dtos'
-import { Hashes, HashesDocument, Users, UsersDocument } from 'src/schemas'
-import { CryptoUtil } from 'src/utils'
+import { ReqPostLoginDto } from '../dtos'
+import { Hashes, HashesDocument, Users, UsersDocument } from '../schemas'
+import { CryptoUtil } from '../utils'
 import { RequestCreateTokenInterface } from '@corp.startup.business.stock.backend.nodejs.nestjs/security/dist/interfaces'
-import { listenerConfig } from 'src/config/constant-listener.config'
+import { listenerConfig } from '../config/constant-listener.config'
 
 @Injectable()
 export class PostLoginService {

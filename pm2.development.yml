@@ -5,6 +5,11 @@ apps:
     instances: 1
     watch: true
   - script: ./dist/main.js
+    name: private-log
+    cwd: './services/private/log'
+    instances: 1
+    watch: true
+  - script: ./dist/main.js
     name: public-authentication
     cwd: './services/public/authentication'
     instances: 1

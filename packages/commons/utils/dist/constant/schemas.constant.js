@@ -9,5 +9,9 @@ exports.schemasConstant = {
     quotations: 'Quotations',
     systemParameters: 'SystemParameters',
     typeMeasures: 'TypeMeasures',
+    logPurchaseOrders: 'LogPurchaseOrders',
+    logPurchaseRequests: 'LogPurchaseRequests',
+    logQuotations: 'LogQuotations',
+    notifications: 'Notifications'
 };
 //# sourceMappingURL=schemas.constant.js.map

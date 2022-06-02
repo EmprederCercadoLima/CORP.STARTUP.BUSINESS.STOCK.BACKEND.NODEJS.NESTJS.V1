@@ -1,8 +1,8 @@
 import { ConflictException, Injectable, Logger } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { ReqPostRecoveryPasswordDto } from 'src/dtos'
-import { Hashes, HashesDocument, Users, UsersDocument } from 'src/schemas'
+import { ReqPostRecoveryPasswordDto } from '../dtos'
+import { Hashes, HashesDocument, Users, UsersDocument } from '../schemas'
 import { CryptoUtil } from '../utils'
 
 @Injectable()

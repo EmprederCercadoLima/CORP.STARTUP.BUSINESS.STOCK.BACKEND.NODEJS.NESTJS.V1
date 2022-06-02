@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import * as moment from 'moment'
 import * as crypto from 'crypto'
-import { Hashes, HashesDocument } from 'src/schemas/hashes.schema'
+import { Hashes, HashesDocument } from '../schemas/hashes.schema'
 import { CryptoUtil } from '../utils'
 
 @Injectable()
@@ -86,7 +86,7 @@ export class GetHashService {
   }
 
   private generateTokenForLoginDummy = (hashes: any, keys: any) => {
-    const email = "supplier01@yopmail.com";
+    const email = "fernando.zavaleta@tismart.com";
     const password = "Facil123";
     const encryptDataEmail = CryptoUtil.encryptData(email, hashes.from, keys.from);
     const encryptDataPassword = CryptoUtil.encryptData(password, hashes.to, keys.to);

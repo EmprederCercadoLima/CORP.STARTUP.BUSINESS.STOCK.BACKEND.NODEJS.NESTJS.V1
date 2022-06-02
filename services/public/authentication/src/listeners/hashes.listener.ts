@@ -2,8 +2,8 @@ import { Injectable, Logger } from '@nestjs/common'
 import { OnEvent } from '@nestjs/event-emitter'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { HashesRemoveHashEvent } from 'src/events'
-import { Hashes, HashesDocument } from 'src/schemas'
+import { HashesRemoveHashEvent } from '../events'
+import { Hashes, HashesDocument } from '../schemas'
 import { listenerConfig } from '../config/constant-listener.config'
 
 @Injectable()

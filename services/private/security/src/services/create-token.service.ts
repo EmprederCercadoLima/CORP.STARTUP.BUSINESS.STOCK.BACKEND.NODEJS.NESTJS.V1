@@ -3,9 +3,9 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as moment from 'moment'
-import { RequestCreateTokenInterface } from 'src/interfaces';
-import { PayloadInterface } from 'src/jwt';
-import { Tokens, TokensDocument } from 'src/schemas';
+import { RequestCreateTokenInterface } from '../interfaces';
+import { PayloadInterface } from '../jwt';
+import { Tokens, TokensDocument } from '../schemas';
 var fs = require('fs');
 @Injectable()
 export class CreateTokenService {

@@ -6,4 +6,8 @@ export declare const schemasConstant: {
     quotations: string;
     systemParameters: string;
     typeMeasures: string;
+    logPurchaseOrders: string;
+    logPurchaseRequests: string;
+    logQuotations: string;
+    notifications: string;
 };

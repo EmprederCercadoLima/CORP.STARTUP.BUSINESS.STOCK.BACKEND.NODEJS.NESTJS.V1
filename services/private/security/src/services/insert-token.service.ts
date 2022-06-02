@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as moment from 'moment';
-import { Tokens, TokensDocument } from 'src/schemas';
+import { Tokens, TokensDocument } from '../schemas';
 
 @Injectable()
 export class InsertTokenService {

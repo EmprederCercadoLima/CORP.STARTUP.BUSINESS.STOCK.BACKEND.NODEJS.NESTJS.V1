@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { ReqPostLogoutDto } from 'src/dtos'
+import { ReqPostLogoutDto } from '../dtos'
 
 @Injectable()
 export class PostLogoutService {
