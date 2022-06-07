@@ -1,5 +1,12 @@
 # CORP.STARTUP.BUSINESS.STOCK.BACKEND.NODEJS.N
 
+## Docker MONGODB
+1.- Crear volumen de base de datos para data persistente: sudo mkdir -p /mongodb_businessstock
+2.- Correr la imagen en un contenedor, apuntando al volumen creado: docker run -it -v /volumen_database_mongodb_business_stock:/data/db --name mongo_businessstock -d mongo:4.4.12-rc1-focal --noscripting --ipv6
+3.- Ejecutar el mongosh sobre el contenedor creado: docker exec -it mongo_businessstock bash
+4.- Verificar data es persisitente: mongosh, use database_name, db.collectionName.find()
+
+
 ## Eventos Historicos
 
 1.- Crear de la estructura del proyecto y nuestros primeros microservicios: 2022-05-03

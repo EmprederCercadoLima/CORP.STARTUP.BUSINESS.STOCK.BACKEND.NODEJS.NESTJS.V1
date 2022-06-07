@@ -3,5 +3,5 @@ export interface PayloadInterface {
   firstName: string;
   lastName: string;
   idGrocer: string;
-  permisions: string[];
+  permissions: string[];
 }

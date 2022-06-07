@@ -22,6 +22,22 @@ export class Users {
   })
   lastName: string
   
+  @Prop(
+    raw({
+        type: {
+            code: String,
+            description: String,
+            value: Number,
+            _id : false
+        }
+    })
+  )
+  documentType: {
+    code: string;
+    description: string;
+    value: number;
+  }
+
   @Prop({
     index: true,
   })
@@ -55,7 +71,7 @@ export class Users {
           default: () => ([])
       })
   )
-  permisions: string[]
+  permissions: string[]
 
   @Prop(
     raw({

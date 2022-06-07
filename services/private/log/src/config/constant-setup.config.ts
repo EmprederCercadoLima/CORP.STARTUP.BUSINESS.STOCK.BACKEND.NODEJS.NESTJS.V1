@@ -9,7 +9,7 @@ export default () => ({
   database: {
     mongodb: {
       local: {
-        uri: 'mongodb://localhost/emprender',
+        uri: 'mongodb://172.17.0.2:27017/businessstock',
       },
       production: {
         uri: process.env.DATABASE_MONGO_HOSTNAME,

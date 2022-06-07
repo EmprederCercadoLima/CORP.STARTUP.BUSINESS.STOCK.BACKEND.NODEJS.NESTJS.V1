@@ -1,6 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable, Logger, UnauthorizedException } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
-import { verify } from "jsonwebtoken";
 import { PermissionsEnum } from "../enums";
 
 @Injectable()
@@ -19,10 +18,10 @@ export class PermissionsGuard implements CanActivate {
         ]);
 
         const request = context.switchToHttp().getRequest();
-        const { permisions, email } = request.token;
+        const { permissions, email } = request.token;
 
         requiredPermissions.forEach((permission: string) => {
-            if(!permisions.includes(permission)) {
+            if(!permissions.includes(permission)) {
                 this.logger.log(`El usuario ${email} no tiene el permiso ${permission}`)
                 throw new UnauthorizedException()
             }

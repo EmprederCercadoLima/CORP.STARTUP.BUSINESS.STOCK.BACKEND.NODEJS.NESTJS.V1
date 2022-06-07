@@ -86,7 +86,7 @@ export class GetHashService {
   }
 
   private generateTokenForLoginDummy = (hashes: any, keys: any) => {
-    const email = "fernando.zavaleta@tismart.com";
+    const email = "client.grocer01@yopmail.com";
     const password = "Facil123";
     const encryptDataEmail = CryptoUtil.encryptData(email, hashes.from, keys.from);
     const encryptDataPassword = CryptoUtil.encryptData(password, hashes.to, keys.to);

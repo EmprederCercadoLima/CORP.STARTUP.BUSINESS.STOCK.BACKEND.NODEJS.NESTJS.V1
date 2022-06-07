@@ -6,7 +6,7 @@ import * as moment from 'moment'
 import { RequestCreateTokenInterface } from '../interfaces';
 import { PayloadInterface } from '../jwt';
 import { Tokens, TokensDocument } from '../schemas';
-var fs = require('fs');
+
 @Injectable()
 export class CreateTokenService {
 
@@ -28,7 +28,7 @@ export class CreateTokenService {
   }
 
   private getToken = (payload: PayloadInterface) => {
-
+    
     return this.jwtService.sign(payload, {
       secret: process.env.JWT_SECRET,
       algorithm: "HS256",

@@ -1,7 +1,6 @@
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable, Logger, UnauthorizedException } from "@nestjs/common";
-import { decode, verify } from "jsonwebtoken";
+import { verify } from "jsonwebtoken";
 import { SecurityService } from "../security.service";
-import { RequestCreateTokenInterface } from "../interfaces";
 
 @Injectable()
 export class SecurityGuard implements CanActivate {
@@ -39,20 +38,4 @@ export class SecurityGuard implements CanActivate {
         return true;
     }
 
-    private decodeTokenForGrocer = (token: string) => {
-        const decodeToken = Buffer.from(decode(token).toString(), 'base64').toString('utf8')
-        return this.parseTokenForGrocer(decodeToken);
-    }
-
-    private parseTokenForGrocer = (decodeToken: string) => {
-        const decodeTokenParse = JSON.parse(decodeToken);
-        this.logger.log(`${SecurityGuard.name}::canActivate::parseTokenForGrocer::${decodeTokenParse}`)
-        return <RequestCreateTokenInterface> {
-            email: decodeTokenParse["email"],
-            firstName: decodeTokenParse["firstName"],
-            lastName: decodeTokenParse["lastName"],
-            idGrocer: decodeTokenParse["idGrocer"],
-            permisions: decodeTokenParse["poermisions"]
-        }
-    }
 }

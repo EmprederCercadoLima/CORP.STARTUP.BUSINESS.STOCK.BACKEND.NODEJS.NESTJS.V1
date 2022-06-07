@@ -59,7 +59,7 @@ export class PostLoginService {
       firstName: findUserByEmail.firstName,
       lastName: findUserByEmail.lastName,
       idGrocer: findUserByEmail.grocers[0],
-      permisions: findUserByEmail.permisions
+      permissions: findUserByEmail.permissions
     })
   }
 
@@ -70,7 +70,7 @@ export class PostLoginService {
   private findUserByEmail = async (decryptDataEmail: string) => {
     const user = await this.usersModule.findOne(
       { email: decryptDataEmail, "status.value": 1, recordActive: true }, 
-      { _id: 1, email: 1, firstName: 1, lastName: 1, password: 1, permisions: 1, grocers: 1, profile: 1, auditProperties: 1 }
+      { _id: 1, email: 1, firstName: 1, lastName: 1, password: 1, permissions: 1, grocers: 1, profile: 1, auditProperties: 1 }
     ).exec();
 
     if (!user) {

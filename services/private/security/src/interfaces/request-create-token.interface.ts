@@ -5,5 +5,5 @@ export interface RequestCreateTokenInterface {
     lastName: string;
     idGrocer: string;
     profile: string;
-    permisions: string[];
+    permissions: string[];
 }
