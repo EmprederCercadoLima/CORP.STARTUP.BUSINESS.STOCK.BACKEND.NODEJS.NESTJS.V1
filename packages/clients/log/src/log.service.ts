@@ -35,4 +35,13 @@ export class LogService {
       .toPromise();
   }
 
+  dashboardExecute(token: any, requestBody: any, message: any, errors: any) {
+    const pattern = { microservice: 'log-dashboard', function: 'dashboard-execute' };
+    return this.client
+      .send<any, any>(
+        pattern,
+        {token, requestBody, message, errors},
+      )
+      .toPromise();
+  }
 }

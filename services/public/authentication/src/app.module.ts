@@ -58,7 +58,7 @@ import { HashesListener } from './listeners/hashes.listener'
       provide: APP_INTERCEPTOR,
       useClass: ResponseInterceptor,
     },
-    HashesListener
+    HashesListener,
   ],
 })
 export class AppModule {}

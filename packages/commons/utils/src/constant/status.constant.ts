@@ -1,42 +1,66 @@
 export const statusConstant = {
-  cancel_the_purchase_request: {
-    value: 0,
-    description: 'La solicitud de compra fue cancelada',
+
+  purchase_request: {
+    cancel_the_purchase_request: {
+      value: 0,
+      description: 'La solicitud de compra fue cancelada',
+    },
+    send_to_the_supplier: {
+      value: 1,
+      description: 'Solicitud de compra enviada a proveedores',
+    },
+    with_assigned_quotes: {
+      value: 2,
+      description: 'Con cotizaciones asignadas',
+    },
+    purchase_order_generated: {
+      value: 4,
+      description: 'Orden de compra generada',
+    },
   },
-  send_to_the_supplier: {
-    value: 1,
-    description: 'Solicitud de compra enviada a proveedores',
+  quotation: {
+    cancel_the_quotation: {
+      value: 0,
+      description: 'La cotización fue cancelada',
+    },
+    send_to_the_grocery: {
+      value: 1,
+      description: 'Cotización enviada al cliente',
+    },
+    read_by_the_grocery: {
+      value: 2,
+      description: 'Cotización vista por la bodega',
+    },
+    purchase_order_generated: {
+      value: 4,
+      description: 'Orden de compra generada',
+    },
   },
-  with_assigned_quotes: {
-    value: 2,
-    description: 'Con cotizaciones asignadas',
-  },
-  purchase_request_ready_generate_order: {
-    value: 3,
-    description: 'Solicitud lista para generar orden de compra',
-  },
-  cancel_the_quotation: {
-    value: 0,
-    description: 'La cotización fue cancelada',
-  },
-  send_to_the_grocery: {
-    value: 1,
-    description: 'Cotización enviada a la bodega',
-  },
-  read_by_the_grocery: {
-    value: 2,
-    description: 'Cotización leida por la bodega',
-  },
-  quotation_ready_generate_order: {
-    value: 3,
-    description: 'Cotización lista para generar orden de compra',
-  },
-  purchase_order_generated: {
-    value: 4,
-    description: 'Orden de compra generada',
-  },
-  order_creates_with_quotation_purchase_request: {
-    value: 1,
-    description: 'La orden de compra fue creada',
-  },
+  purchase_order: {
+    generated: {
+      value: 1,
+      description: 'Orden de compra creada'
+    },
+    approbed_to_supplier: {
+      value: 2,
+      description: 'Aprobada por el proveedor'
+    },
+    five_days_delivery_date: {
+      value: 3,
+      description: 'Cinco días para la fecha de entrega'
+    },
+    one_days_delivery_date: {
+      value: 4,
+      description: 'Cinco días para la fecha de entrega'
+    },
+    concreted: {
+      value: 5,
+      description: 'Concretada con éxito'
+    },
+    failded: {
+      value: 6,
+      description: 'No concretada'
+    }
+  }
+  
 };

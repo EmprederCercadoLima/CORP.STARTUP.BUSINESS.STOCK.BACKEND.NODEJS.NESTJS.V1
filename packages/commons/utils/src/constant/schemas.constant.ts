@@ -9,5 +9,6 @@ export const schemasConstant = {
   logPurchaseOrders: 'LogPurchaseOrders',
   logPurchaseRequests: 'LogPurchaseRequests',
   logQuotations: 'LogQuotations',
-  notifications: 'Notifications'
+  notifications: 'Notifications',
+  shoppingCards: 'ShoppingCards'
 };

@@ -8,5 +8,6 @@ export enum PermissionsEnum {
     GROCER_WRITE = 'grocer::write',
     GROCER_READ = 'grocer::read',
     QUOTATION_READ = 'quotation::read',
-    QUOTATION_WRITE = 'quotation::write'
+    QUOTATION_WRITE = 'quotation::write',
+    DASHBOARD_READ = 'dashboard::red'
 }

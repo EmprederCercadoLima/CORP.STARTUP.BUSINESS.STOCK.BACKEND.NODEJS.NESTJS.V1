@@ -1,6 +1,6 @@
 {
   "name": "@corp.startup.business.stock.backend.nodejs.nestjs/utils",
-  "version": "0.0.30",
+  "version": "0.0.34",
   "description": "",
   "main": "dist/main.js",
   "scripts": {

@@ -10,10 +10,10 @@ export class CryptoUtil {
   }
 
   static decryptData = (cryptText, hash, key) => {
-    var cipherParams = CryptoJs.lib.CipherParams.create({
+    const cipherParams = CryptoJs.lib.CipherParams.create({
       ciphertext: CryptoJs.enc.Base64.parse(cryptText),
     })
-    var decryptedFromText = CryptoJs.AES.decrypt(cipherParams, CryptoJs.enc.Utf8.parse(hash), { iv: CryptoJs.enc.Utf8.parse(key) })
+    const decryptedFromText = CryptoJs.AES.decrypt(cipherParams, CryptoJs.enc.Utf8.parse(hash), { iv: CryptoJs.enc.Utf8.parse(key) })
     return decryptedFromText.toString(CryptoJs.enc.Utf8)
   }
 }

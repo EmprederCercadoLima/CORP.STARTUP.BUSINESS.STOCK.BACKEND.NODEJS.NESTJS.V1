@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseInterceptors } from '@nestjs/common'
+import { Body, Controller, Get, Post } from '@nestjs/common'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { controllerConfig } from './config/constant-controller.config'
 import { ReqPostLoginDto, ReqPostLogoutDto, ReqPostRecoveryPasswordDto } from './dtos'
@@ -35,7 +35,7 @@ export class AppController {
     summary: controllerConfig.apis.postLogout.operation.summary,
   })
   @Post(controllerConfig.apis.postLogout.name)
-  postLogout(@Body() reqPostLogoutDto: ReqPostLogoutDto): string {
+  postLogout(@Body() reqPostLogoutDto: ReqPostLogoutDto) {
     return this.postLogoutService.execute(reqPostLogoutDto)
   }
 

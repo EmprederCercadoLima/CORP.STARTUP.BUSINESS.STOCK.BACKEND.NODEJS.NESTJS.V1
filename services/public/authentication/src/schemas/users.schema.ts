@@ -21,21 +21,21 @@ export class Users {
     index: true,
   })
   lastName: string
-  
+
   @Prop(
     raw({
-        type: {
-            code: String,
-            description: String,
-            value: Number,
-            _id : false
-        }
-    })
+      type: {
+        code: String,
+        description: String,
+        value: Number,
+        _id: false,
+      },
+    }),
   )
   documentType: {
-    code: string;
-    description: string;
-    value: number;
+    code: string
+    description: string
+    value: number
   }
 
   @Prop({
@@ -50,41 +50,41 @@ export class Users {
         description: String,
         _id: false,
       },
-    })
+    }),
   )
   profile: {
-    code: string,
+    code: string
     description: string
   }
 
   @Prop(
-      raw({
-          type: [],
-          default: () => ([])
-      })
+    raw({
+      type: [],
+      default: () => [],
+    }),
   )
   grocers: string[]
 
   @Prop(
-      raw({
-          type: [],
-          default: () => ([])
-      })
+    raw({
+      type: [],
+      default: () => [],
+    }),
   )
   permissions: string[]
 
   @Prop(
     raw({
-        type: {
-            description: String,
-            value: Number,
-            _id : false
-        }
-    })
+      type: {
+        description: String,
+        value: Number,
+        _id: false,
+      },
+    }),
   )
   status: {
-      description: string;
-      value: number;
+    description: string
+    value: number
   }
 
   @Prop(

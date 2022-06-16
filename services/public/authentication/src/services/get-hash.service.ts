@@ -4,7 +4,6 @@ import { Model } from 'mongoose'
 import * as moment from 'moment'
 import * as crypto from 'crypto'
 import { Hashes, HashesDocument } from '../schemas/hashes.schema'
-import { CryptoUtil } from '../utils'
 
 @Injectable()
 export class GetHashService {
@@ -22,15 +21,14 @@ export class GetHashService {
       const generateHashes = this.generateHashes()
       const generateKeys = this.generateKeys()
       const create = await this.create(generateHashes, generateKeys)
-      this.generateTokenForLoginDummy(create.hashes, create.keys);
       return {
         id: create._id,
         hashes: create.hashes,
         keys: create.keys,
       }
     } catch (error) {
-      const { errors, message } = error
-      this.logger.error(`${JSON.stringify(GetHashService.name)}::execute::${JSON.stringify(errors)}::${JSON.stringify(message)}`)
+      const { response } = error
+      this.logger.error(`error::execute::${JSON.stringify(response.statusCode)}::${JSON.stringify(response.message)}`)
       throw new Error()
     }
   }
@@ -83,18 +81,6 @@ export class GetHashService {
     })
 
     return hash
-  }
-
-  private generateTokenForLoginDummy = (hashes: any, keys: any) => {
-    const email = "client.grocer01@yopmail.com";
-    const password = "Facil123";
-    const encryptDataEmail = CryptoUtil.encryptData(email, hashes.from, keys.from);
-    const encryptDataPassword = CryptoUtil.encryptData(password, hashes.to, keys.to);
-    const encryptCredentials = CryptoUtil.encryptData(JSON.stringify({ encryptDataEmail, encryptDataPassword }), hashes.from, keys.to);
-    
-    this.logger.debug(`${JSON.stringify(GetHashService.name)}::generateTokenForLoginDummy ${encryptCredentials}`)
-
-
   }
 
 }

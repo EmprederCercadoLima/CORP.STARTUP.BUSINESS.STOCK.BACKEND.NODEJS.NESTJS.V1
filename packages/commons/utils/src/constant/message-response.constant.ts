@@ -10,6 +10,7 @@ export const messageResponseConstant = {
     product: 'Not found exception [product]',
     systemParameter: 'Not found exception [system-parameter]',
     typeMeasure: 'Not found exception [type-measure]',
+    shoppingCard: 'Not found exception [shopping-card]',
   },
   conflict_exception: {
     insufficient_permissions: 'Permisos insuficientes para esta operación',
