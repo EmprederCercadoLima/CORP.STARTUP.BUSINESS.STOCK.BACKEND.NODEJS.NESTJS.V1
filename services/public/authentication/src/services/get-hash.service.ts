@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common'
+import { HttpException, Injectable, Logger } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import * as moment from 'moment'
@@ -29,7 +29,7 @@ export class GetHashService {
     } catch (error) {
       const { response } = error
       this.logger.error(`error::execute::${JSON.stringify(response.statusCode)}::${JSON.stringify(response.message)}`)
-      throw new Error()
+      throw new HttpException(response.message, response.statusCode)
     }
   }
 
@@ -82,5 +82,4 @@ export class GetHashService {
 
     return hash
   }
-
 }

@@ -61,6 +61,16 @@ export const statusConstant = {
       value: 6,
       description: 'No concretada'
     }
+  },
+  shopping_card: {
+    create: {
+      value: 1,
+      description: 'Carrito de compra generado'
+    },
+    purchase_request_generated: {
+      value: 2,
+      description: 'Solicitud de compra generada'
+    }
   }
   
 };

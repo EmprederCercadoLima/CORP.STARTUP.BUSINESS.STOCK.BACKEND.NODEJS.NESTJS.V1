@@ -35,17 +35,6 @@ db.SystemParameters.insertMany(
                   init: 0,
                   current: 0
                 },
-            }, {
-                code: "QUOTATION_SECUENCE",
-                prefix: {
-                  init: "QT-A",
-                  current: "QT-A"
-                },
-                value: {
-                  limit: 9999,
-                  init: 0,
-                  current: 0,
-                }
             }],
             status: {
                 value: 1,
@@ -94,17 +83,6 @@ db.SystemParameters.insertMany(
                   init: 0,
                   current: 0
                 },
-            }, {
-                code: "QUOTATION_SECUENCE",
-                prefix: {
-                  init: "QT-A",
-                  current: "QT-A"
-                },
-                value: {
-                  limit: 9999,
-                  init: 0,
-                  current: 0,
-                }
             }],
             status: {
                 value: 1,
@@ -117,6 +95,58 @@ db.SystemParameters.insertMany(
                 userUpdate: null,
                 recordActive: true
             }
+        },
+        {
+          idTarget: new ObjectId("629ecbfe642eb00e542beca1"),
+          operations: [{
+              code: "QUOTATION_SECUENCE",
+              prefix: {
+                init: "QT1-A",
+                current: "QT1-A"
+              },
+              value: {
+                limit: 9999,
+                init: 0,
+                current: 0,
+              }
+          }],
+          status: {
+              value: 1,
+              description: "Activado"
+          },
+          auditProperties: {
+              dateCreate: new Date(),
+              dateUpdate: null,
+              userCreate: 'Database Script',
+              userUpdate: null,
+              recordActive: true
+          }
+      },
+      {
+        idTarget: new ObjectId("629ecbfe642eb00e542beca0"),
+        operations: [{
+            code: "QUOTATION_SECUENCE",
+            prefix: {
+              init: "QT2-A",
+              current: "QT2-A"
+            },
+            value: {
+              limit: 9999,
+              init: 0,
+              current: 0,
+            }
+        }],
+        status: {
+            value: 1,
+            description: "Activado"
+        },
+        auditProperties: {
+            dateCreate: new Date(),
+            dateUpdate: null,
+            userCreate: 'Database Script',
+            userUpdate: null,
+            recordActive: true
         }
+    }
     ]
     )
